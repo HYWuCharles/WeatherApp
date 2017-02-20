@@ -72,19 +72,11 @@ public class OpenPage extends Activity {
 
     private TextView todayTemp, tomorrowTemp, day1Temp, day2Temp, day3Temp;
 
-    private ImageButton nextPage;
+    private ImageButton nextPage, refresh;
 
     private List<String> weekdays, types;
 
-    @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_main);
-        Button search_city = (Button) findViewById(R.id.button);
-        //test = (TextView) findViewById(R.id.test_pullParser);
-        //test1 = (TextView) findViewById(R.id.test_pullParser1);
-        //test2 = (TextView) findViewById(R.id.test_pullParser2);
+    public void initialView(){
         city_view = (TextView) findViewById(R.id.city);
         current_temp = (TextView) findViewById(R.id.xianzaiwendu);
         current_weather = (TextView) findViewById(R.id.tianqi);
@@ -100,11 +92,24 @@ public class OpenPage extends Activity {
         day2Im = (ImageView) findViewById(R.id.day2m);
         day3Im = (ImageView) findViewById(R.id.day3Im);
         nextPage = (ImageButton) findViewById(R.id.nextPage);
+        refresh = (ImageButton) findViewById(R.id.refresh);
         todayTemp = (TextView) findViewById(R.id.todayTemp);
         tomorrowTemp = (TextView) findViewById(R.id.tomorrowTemp);
         day1Temp = (TextView) findViewById(R.id.day1Temp);
         day2Temp = (TextView) findViewById(R.id.day2Temp);
         day3Temp = (TextView) findViewById(R.id.day3Temp);
+    }
+
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_main);
+        Button search_city = (Button) findViewById(R.id.button);
+        //test = (TextView) findViewById(R.id.test_pullParser);
+        //test1 = (TextView) findViewById(R.id.test_pullParser1);
+        //test2 = (TextView) findViewById(R.id.test_pullParser2);
+        initialView();
         //测试:changeIm(todayIm, "晴");
         locationing = new ProgressDialog(OpenPage.this);
         locationing.setMessage("定位中,请稍后...");
@@ -138,23 +143,53 @@ public class OpenPage extends Activity {
             }
         });
 
+
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try{
+                                initLoacation();
+                                while (cityInfo.equalsIgnoreCase("")){}
+                                findCityId(cityInfo);
+                                getWeatherInfo();
+                            }catch (Exception e){
+                                Toast.makeText(OpenPage.this, "刷新失败!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }).start();
+                }catch (Exception e){
+                    Toast.makeText(OpenPage.this, "刷新失败!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         nextPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(OpenPage.this, SuggestionPage.class);
-                intent.putExtra("cityId", cityId);
-                intent.putExtra("sunrise", weather.get("sunrise_1"));
-                intent.putExtra("sunset", weather.get("sunset_1"));
-                intent.putExtra("shidu", weather.get("shidu"));
-                intent.putExtra("aqi", weather.get("aqi"));
-                intent.putExtra("fengli", weather.get("fengli"));
-                intent.putExtra("fengxiang", weather.get("fengxiang"));
-                intent.putExtra("pm25", weather.get("pm25"));
-                intent.putExtra("quality", weather.get("quality"));
-                intent.putExtra("cityName", cityInfo);
-                startActivity(intent);
+                try {
+                    intent.putExtra("cityId", cityId);
+                    intent.putExtra("sunrise", weather.get("sunrise_1"));
+                    intent.putExtra("sunset", weather.get("sunset_1"));
+                    intent.putExtra("shidu", weather.get("shidu"));
+                    intent.putExtra("aqi", weather.get("aqi"));
+                    intent.putExtra("fengli", weather.get("fengli"));
+                    intent.putExtra("fengxiang", weather.get("fengxiang"));
+                    intent.putExtra("pm25", weather.get("pm25"));
+                    intent.putExtra("quality", weather.get("quality"));
+                    intent.putExtra("cityName", cityInfo);
+                    startActivity(intent);
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(OpenPage.this, "请检查网络连接后再进行进一步操作", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
     }
 
     @Override
