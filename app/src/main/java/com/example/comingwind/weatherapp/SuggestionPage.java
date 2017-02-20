@@ -88,6 +88,7 @@ public class SuggestionPage extends Activity {
                     //do nothing
                 }
                 if (resultCode == RESULT_CANCELED){
+                    //直接回主界面
                     finish();
                 }
                 break;
