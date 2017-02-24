@@ -2,18 +2,23 @@ package com.example.comingwind.weatherapp;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Path;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.provider.Settings;
 import android.util.Log;
 import android.util.Xml;
 import android.view.View;
@@ -100,6 +105,22 @@ public class OpenPage extends Activity {
         day3Temp = (TextView) findViewById(R.id.day3Temp);
     }
 
+    public static boolean isNetworkAvaliable(Context context){
+        Log.e("TestNetwork","---->start");
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(
+                context.CONNECTIVITY_SERVICE);
+        if(connectivityManager != null){
+            NetworkInfo info = connectivityManager.getActiveNetworkInfo();
+            if (info != null && info.isConnected()){
+                return true;
+            }else {
+                return false;
+            }
+        }else {
+            return false;
+        }
+    }
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,84 +132,106 @@ public class OpenPage extends Activity {
         //test2 = (TextView) findViewById(R.id.test_pullParser2);
         initialView();
         //测试:changeIm(todayIm, "晴");
-        locationing = new ProgressDialog(OpenPage.this);
-        locationing.setMessage("定位中,请稍后...");
-        locationing.show();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    //虚拟机测试注释掉initlocation()和while语句,写死为北京
-                    //真机测试可用定位,去掉initlocation()注释
-                    initLoacation();
-                    //异步调用,需要等待返回结果后再进行下一步
-                    //此处可优化,判断cityInfo中是否有值
-                    //Thread.sleep(500);
-                    while (cityInfo.equalsIgnoreCase("")){}
-                    //cityInfo = "北京";
-                    findCityId(cityInfo);
-                    locationing.dismiss();
-                    //Log.e("City Info", cityInfo);
-                    getWeatherInfo();
-                }catch (Exception e){
-                    Log.e("City Error",Log.getStackTraceString(e));
+        if (isNetworkAvaliable(OpenPage.this)){
+            locationing = new ProgressDialog(OpenPage.this);
+            locationing.setMessage("定位中,请稍后...");
+            locationing.show();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        //虚拟机测试注释掉initlocation()和while语句,写死为北京
+                        //真机测试可用定位,去掉initlocation()注释
+                        //initLoacation();
+                        //异步调用,需要等待返回结果后再进行下一步
+                        //此处可优化,判断cityInfo中是否有值
+                        //Thread.sleep(500);
+                        //while (cityInfo.equalsIgnoreCase("")){}
+                        cityInfo = "北京";
+                        findCityId(cityInfo);
+                        locationing.dismiss();
+                        //Log.e("City Info", cityInfo);
+                        getWeatherInfo();
+                    }catch (Exception e){
+                        Log.e("City Error",Log.getStackTraceString(e));
+                    }
                 }
-            }
-        }).start();
-        search_city.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(OpenPage.this, Select_City.class);
-                startActivityForResult(intent, 1);
-            }
-        });
+            }).start();
+            search_city.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(OpenPage.this, Select_City.class);
+                    startActivityForResult(intent, 1);
+                }
+            });
 
 
-        refresh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try{
-                                initLoacation();
-                                while (cityInfo.equalsIgnoreCase("")){}
-                                findCityId(cityInfo);
-                                getWeatherInfo();
-                            }catch (Exception e){
-                                Toast.makeText(OpenPage.this, "刷新失败!", Toast.LENGTH_SHORT).show();
+            refresh.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try{
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try{
+                                    initLoacation();
+                                    while (cityInfo.equalsIgnoreCase("")){}
+                                    findCityId(cityInfo);
+                                    getWeatherInfo();
+                                }catch (Exception e){
+                                    Toast.makeText(OpenPage.this, "刷新失败!", Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
-                    }).start();
-                }catch (Exception e){
-                    Toast.makeText(OpenPage.this, "刷新失败!", Toast.LENGTH_SHORT).show();
+                        }).start();
+                    }catch (Exception e){
+                        Toast.makeText(OpenPage.this, "刷新失败!", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
+            });
 
-        nextPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(OpenPage.this, SuggestionPage.class);
-                try {
-                    intent.putExtra("cityId", cityId);
-                    intent.putExtra("sunrise", weather.get("sunrise_1"));
-                    intent.putExtra("sunset", weather.get("sunset_1"));
-                    intent.putExtra("shidu", weather.get("shidu"));
-                    intent.putExtra("aqi", weather.get("aqi"));
-                    intent.putExtra("fengli", weather.get("fengli"));
-                    intent.putExtra("fengxiang", weather.get("fengxiang"));
-                    intent.putExtra("pm25", weather.get("pm25"));
-                    intent.putExtra("quality", weather.get("quality"));
-                    intent.putExtra("cityName", cityInfo);
-                    startActivity(intent);
-                }catch (Exception e){
-                    e.printStackTrace();
-                    Toast.makeText(OpenPage.this, "请检查网络连接后再进行进一步操作", Toast.LENGTH_SHORT).show();
+            nextPage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(OpenPage.this, SuggestionPage.class);
+                    try {
+                        intent.putExtra("cityId", cityId);
+                        intent.putExtra("sunrise", weather.get("sunrise_1"));
+                        intent.putExtra("sunset", weather.get("sunset_1"));
+                        intent.putExtra("shidu", weather.get("shidu"));
+                        intent.putExtra("aqi", weather.get("aqi"));
+                        intent.putExtra("fengli", weather.get("fengli"));
+                        intent.putExtra("fengxiang", weather.get("fengxiang"));
+                        intent.putExtra("pm25", weather.get("pm25"));
+                        intent.putExtra("quality", weather.get("quality"));
+                        intent.putExtra("cityName", cityInfo);
+                        startActivity(intent);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        Toast.makeText(OpenPage.this, "请检查网络连接后再进行进一步操作", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
+            });
+        }else {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(OpenPage.this);
+            dialog.setTitle("网络未连接");
+            dialog.setMessage("检测到网络未连接,是否打开网络设置?");
+            dialog.setCancelable(false);
+            dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+                    startActivity(intent);
+                }
+            });
+            dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            dialog.show();
+        }
+
 
     }
 
@@ -423,11 +466,15 @@ public class OpenPage extends Activity {
 
     public List<String> getWeekdays(){
         List<String> weekdays = new ArrayList<String>();
-        for (WeatherEntity weatherEntity : weatherEntityList){
-            String temp = weatherEntity.getDate();
-            int startPos = temp.indexOf("星期");
-            int endPos = startPos + 3;
-            weekdays.add(temp.substring(startPos, endPos));
+        try {
+            for (WeatherEntity weatherEntity : weatherEntityList) {
+                String temp = weatherEntity.getDate();
+                int startPos = temp.indexOf("星期");
+                int endPos = startPos + 3;
+                weekdays.add(temp.substring(startPos, endPos));
+            }
+        }catch (Exception e){
+            Toast.makeText(OpenPage.this, "请检查网络设置!", Toast.LENGTH_SHORT).show();
         }
         return weekdays;
     }
