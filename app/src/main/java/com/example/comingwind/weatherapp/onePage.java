@@ -160,12 +160,12 @@ public class onePage extends Activity {
                     try {
                         //虚拟机测试注释掉initlocation()和while语句,写死为北京
                         //真机测试可用定位,去掉initlocation()注释
-                        initLoacation();
+                        //initLoacation();
                         //异步调用,需要等待返回结果后再进行下一步
                         //此处可优化,判断cityInfo中是否有值
                         //Thread.sleep(500);
-                        while (cityInfo.equalsIgnoreCase("")){}
-                        //cityInfo = "北京";
+                        //while (cityInfo.equalsIgnoreCase("")){}
+                        cityInfo = "北京";
                         findCityId(cityInfo);
                         locationing.dismiss();
                         //Log.e("City Info", cityInfo);

@@ -331,7 +331,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="18dp"
-                    android:src="@drawable/fengxiang01" />
+                    android:src="@drawable/fengxiang001" />
 
                 <TextView
                     android:id="@+id/fengxiang"
@@ -359,7 +359,7 @@
 
                 <TextView
                     android:id="@+id/fengxiang2"
-                    android:layout_width="30dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/fengxiang1"
                     android:layout_alignBottom="@+id/fengxiang1"
@@ -389,7 +389,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/fengxiang01"
                     android:layout_alignTop="@+id/aqi1"
-                    android:src="@drawable/aqi" />
+                    android:src="@drawable/kongqi001" />
 
                 <TextView
                     android:id="@+id/aqi2"
@@ -456,7 +456,7 @@
                     android:layout_alignLeft="@+id/fengxiang01"
                     android:layout_below="@+id/aqi"
                     android:layout_marginTop="16dp"
-                    android:src="@drawable/shidu" />
+                    android:src="@drawable/shidu001" />
 
                 <TextView
                     android:id="@+id/shidu1"
@@ -487,7 +487,7 @@
                     android:layout_below="@+id/shidu"
                     android:layout_marginTop="16dp"
                     android:layout_alignRight="@+id/fengxiang01"
-                    android:src="@drawable/ziwaixian01" />
+                    android:src="@drawable/ziwaixian" />
 
                 <TextView
                     android:id="@+id/ziwaixian1"
@@ -495,7 +495,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@+id/shidu1"
                     android:layout_alignTop="@+id/ziwaixian"
-                    android:layout_marginTop="14dp"
                     android:text="紫外线强度"
                     android:textColor="#ffffff"
                     android:textSize="6pt"
