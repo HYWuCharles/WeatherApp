@@ -35,10 +35,10 @@
         <service android:name="com.amap.api.location.APSService" >
         </service>
         <activity android:name=".OpenPage">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
 
         <activity android:name=".Select_City">
@@ -46,6 +46,13 @@
 
         <activity android:name=".SuggestionPage"></activity>
         <activity android:name=".currentData"></activity>
+
+        <activity android:name=".onePage">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

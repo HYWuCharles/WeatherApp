@@ -1,0 +1,773 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/qingtian"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            tools:context=".OpenPage">
+
+            <TextView
+                android:id="@+id/city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="17dp"
+                android:text="成都"
+                android:textColor="#ffffff"
+                android:textSize="10pt"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/xianzaiwendu"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/city"
+                android:layout_centerHorizontal="true"
+                android:text="1℃"
+                android:textColor="#ffffff"
+                android:textSize="30pt"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/wendu"
+                android:layout_centerHorizontal="true"
+                android:text="未获取到数据!"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tianqi"
+                android:textColor="#ffffff"
+                android:textSize="7pt"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tianqi"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/xianzaiwendu"
+                android:text="晴"
+                android:textColor="#ffffff"
+                android:textSize="10pt"
+                android:textStyle="bold" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button"
+                android:background="@drawable/genghuan"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/city"
+                android:layout_toStartOf="@+id/city" />
+
+
+            <!--<ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/xiayiye"
+                android:id="@+id/nextPage"/>-->
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/refresh1"
+                android:id="@+id/refresh"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_below="@+id/wendu"
+                android:orientation="vertical"
+                android:gravity="center">
+                <!---->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+                    <TextView
+                        android:id="@+id/today"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text="周一"
+                        android:textColor="#ffffff"
+                        android:textSize="9pt"
+                        android:textStyle="bold"
+                        android:layout_weight="1"/>
+
+                    <ImageView
+                        android:id="@+id/todayIm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/duoyun"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:id="@+id/todayTemp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="未获取到数据"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="9pt"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tomorrow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text="周二"
+                        android:textColor="#ffffff"
+                        android:textSize="9pt"
+                        android:textStyle="bold"
+                        android:layout_weight="1"/>
+                    <ImageView
+                        android:id="@+id/tomorrowIm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/duoyun"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/tomorrowTemp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="未获取到数据"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="9pt" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/day1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="周三"
+                        android:textColor="#ffffff"
+                        android:textSize="9pt"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"/>
+                    <ImageView
+                        android:id="@+id/day1Im"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/duoyun"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/day1Temp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="未获取到数据"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="9pt" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+                    <TextView
+                        android:id="@+id/day2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="周四"
+                        android:textColor="#ffffff"
+                        android:textSize="9pt"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"/>
+                    <ImageView
+                        android:id="@+id/day2m"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/duoyun"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/day2Temp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="未获取到数据"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="9pt" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+                    <TextView
+                        android:id="@+id/day3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="周五"
+                        android:textColor="#ffffff"
+                        android:textSize="9pt"
+                        android:textStyle="bold"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"/>
+                    <ImageView
+                        android:id="@+id/day3Im"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/duoyun"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:id="@+id/day3Temp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="未获取到数据"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="9pt" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:isScrollContainer="true">
+                <!--android:background="@drawable/beijing03"-->
+
+                <!--<TextView
+                    android:id="@+id/shishishuju"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="实时数据"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginTop="14dp"
+                    android:textColor="#ffffff"
+                    android:textSize="9pt"
+                    android:textStyle="bold" />-->
+
+
+
+                <!--<TextView
+                    android:id="@+id/didian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="19dp"
+                    android:layout_marginTop="185dp"
+                    android:text="成都"
+                    android:textColor="#ffffff"
+                    android:textSize="7pt"
+                    android:textStyle="bold" />-->
+
+                <!--<TextView
+                    android:id="@+id/shijian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="19dp"
+                    android:layout_marginTop="185dp"
+                    android:text="13:14"
+                    android:textColor="#ffffff"
+                    android:textSize="7pt"
+                    android:textStyle="bold" />-->
+
+                <ImageView
+                    android:id="@+id/fengxiang01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="18dp"
+                    android:src="@drawable/fengxiang01" />
+
+                <TextView
+                    android:id="@+id/fengxiang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_alignTop="@+id/fengxiang01"
+                    android:layout_toRightOf="@+id/fengxiang01"
+                    android:layout_marginLeft="20dp"
+                    android:text="风向"
+                    android:textColor="#ffffff"
+                    android:textSize="7pt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/fengxiang1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/fengxiang"
+                    android:layout_below="@+id/fengxiang"
+                    android:text="北风"
+                    android:textColor="#ffffff"
+                    android:textSize="5pt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/fengxiang2"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/fengxiang1"
+                    android:layout_alignBottom="@+id/fengxiang1"
+                    android:layout_toRightOf="@+id/fengxiang1"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:text="三级"
+                    android:textColor="#ffffff"
+                    android:textSize="5pt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/aqi1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/fengxiang"
+                    android:layout_below="@+id/fengxiang01"
+                    android:layout_marginTop="14dp"
+                    android:text="AQI:"
+                    android:textColor="#ffffff"
+                    android:textSize="7pt"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/aqi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/fengxiang01"
+                    android:layout_alignTop="@+id/aqi1"
+                    android:src="@drawable/aqi" />
+
+                <TextView
+                    android:id="@+id/aqi2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/aqi1"
+                    android:layout_toRightOf="@+id/aqi1"
+                    android:text="34"
+                    android:textColor="#ffffff"
+                    android:textSize="7pt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/aqi3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/aqi1"
+                    android:layout_below="@+id/aqi1"
+                    android:text="空气质量："
+                    android:textColor="#ffffff"
+                    android:textSize="5pt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/aqi4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/aqi3"
+                    android:layout_alignBottom="@+id/aqi3"
+                    android:layout_toRightOf="@+id/aqi3"
+                    android:text="优"
+                    android:textColor="#ffffff"
+                    android:textSize="5pt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/aqi5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/aqi4"
+                    android:layout_alignBottom="@+id/aqi4"
+                    android:layout_toRightOf="@+id/aqi4"
+                    android:text="/PM2.5:"
+                    android:textColor="#ffffff"
+                    android:textSize="5pt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/aqi6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/aqi5"
+                    android:layout_alignBottom="@+id/aqi5"
+                    android:layout_toRightOf="@+id/aqi5"
+                    android:text="7"
+                    android:textColor="#ffffff"
+                    android:textSize="5pt"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/shidu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/fengxiang01"
+                    android:layout_below="@+id/aqi"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/shidu" />
+
+                <TextView
+                    android:id="@+id/shidu1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/aqi3"
+                    android:layout_alignTop="@+id/shidu"
+                    android:text="相对湿度"
+                    android:textColor="#ffffff"
+                    android:textSize="7pt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/shidu2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/shidu1"
+                    android:layout_below="@+id/shidu1"
+                    android:text="21%"
+                    android:textColor="#ffffff"
+                    android:textSize="5pt"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/ziwaixian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/shidu"
+                    android:layout_marginTop="16dp"
+                    android:layout_alignRight="@+id/fengxiang01"
+                    android:src="@drawable/ziwaixian01" />
+
+                <TextView
+                    android:id="@+id/ziwaixian1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/shidu1"
+                    android:layout_alignTop="@+id/ziwaixian"
+                    android:layout_marginTop="14dp"
+                    android:text="紫外线强度"
+                    android:textColor="#ffffff"
+                    android:textSize="6pt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/ziwaixian2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/ziwaixian"
+                    android:layout_alignLeft="@+id/shidu1"
+                    android:layout_marginTop="14dp"
+                    android:text="弱"
+                    android:textColor="#ffffff"
+                    android:textSize="5pt"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/jianyi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/fengxiang01"
+                    android:layout_marginTop="14dp"
+                    android:layout_below="@+id/ziwaixian"
+                    android:src="@drawable/jianbao" />
+
+                <TextView
+                    android:id="@+id/jianyi1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/fengxiang"
+                    android:text="天冷风大，易发生感冒，请注意适当增加衣服，加强自我防护避免感冒。"
+                    android:textColor="#ffffff"
+                    android:textSize="6pt"
+                    android:textStyle="bold"
+                    android:layout_alignTop="@+id/jianyi"/>
+
+                <!--<ImageButton
+                    android:id="@+id/shouye"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="14dp"
+                    android:layout_marginTop="14dp"
+                    android:background="#0000"
+                    android:src="@drawable/shouye001" />-->
+
+                <!--<ImageButton
+                    android:id="@+id/fanhui"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="14dp"
+                    android:layout_marginBottom="14dp"
+                    android:background="#0000"
+                    android:src="@drawable/fanhui01" />-->
+
+            </RelativeLayout>
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:isScrollContainer="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp">
+                <!--android:background="@drawable/beijing2"-->
+                >
+
+                <!--<ImageButton
+                    android:id="@+id/shouye"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="14dp"
+                    android:layout_marginTop="14dp"
+                    android:background="#0000"
+                    android:src="@drawable/shouye001" />-->
+
+                <!--<ImageButton
+                    android:id="@+id/more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="14dp"
+                    android:layout_marginBottom="14dp"
+                    android:background="#0000"
+                    android:src="@drawable/xiayiye" />-->
+
+                <!--<TextView
+                    android:id="@+id/richushijian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="18dp"
+                    android:text="05:00"
+                    android:textColor="#ffffff"
+                    android:textSize="5pt"
+                    android:textStyle="bold" />-->
+
+                <!--<TextView
+                    android:id="@+id/riluoshijian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/richushijian"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    android:text="18:00"
+                    android:textColor="#ffffff"
+                    android:textSize="5pt"
+                    android:textStyle="bold" />-->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/richushijian"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/relative1">
+
+                    <ImageView
+                        android:id="@+id/chuanyi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="14dp"
+                        android:src="@drawable/chuanyi" />
+
+                    <TextView
+                        android:id="@+id/chuanyi1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/chuanyi"
+                        android:layout_marginLeft="16dp"
+                        android:layout_toRightOf="@+id/chuanyi"
+                        android:text="穿衣指数"
+                        android:textColor="#ffffff"
+                        android:textSize="6pt"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/chuanyi2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/chuanyi1"
+                        android:layout_toRightOf="@+id/chuanyi1"
+                        android:layout_marginLeft="32dp"
+                        android:text="冷"
+                        android:textColor="#ffffff"
+                        android:textSize="6pt"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/chuanyi3"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/chuanyi1"
+                        android:layout_below="@+id/chuanyi1"
+                        android:text="天气冷，建议着棉服、羽绒服、皮夹克加羊毛衫等冬季服装。年老体弱者宜着厚棉衣、冬大衣或厚羽绒服。"
+                        android:textColor="#ffffff"
+                        android:textSize="6pt"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/relative1"
+                    android:id="@+id/relative2"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp">
+                    <ImageView
+                        android:id="@+id/chenlian"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="14dp"
+                        android:src="@drawable/chenlian" />
+
+                    <TextView
+                        android:id="@+id/chenlian1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/chenlian"
+                        android:layout_alignTop="@+id/chenlian"
+                        android:layout_marginLeft="16dp"
+                        android:text="晨练指数"
+                        android:textColor="#ffffff"
+                        android:textSize="6pt"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/chenlian2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="32dp"
+                        android:text="较不宜"
+                        android:textColor="#ffffff"
+                        android:textSize="6pt"
+                        android:textStyle="bold"
+                        android:layout_alignTop="@+id/chenlian1"
+                        android:layout_toRightOf="@+id/chenlian1"/>
+
+                    <TextView
+                        android:id="@+id/chenlian3"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:text="风力稍大，较不宜晨练，室外锻炼请注意选择避风的地点，避免迎风锻炼。"
+                        android:textColor="#ffffff"
+                        android:textSize="6pt"
+                        android:textStyle="bold"
+                        android:layout_alignLeft="@+id/chenlian1"
+                        android:layout_below="@+id/chenlian1"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/relative2"
+                    android:id="@+id/relative3"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp">
+                    <ImageView
+                        android:id="@+id/xiche"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="14dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/xiche" />
+
+                    <TextView
+                        android:id="@+id/xiche1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_alignTop="@+id/xiche"
+                        android:layout_toRightOf="@+id/xiche"
+                        android:text="洗车指数"
+                        android:textColor="#ffffff"
+                        android:textSize="6pt"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/xiche2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/xiche1"
+                        android:layout_alignTop="@+id/xiche1"
+                        android:layout_marginLeft="32dp"
+                        android:text="较不宜"
+                        android:textColor="#ffffff"
+                        android:textSize="6pt"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/xiche3"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/xiche1"
+                        android:layout_alignLeft="@+id/xiche1"
+                        android:text="较不宜洗车，未来一天无雨，风力较大，如果执意擦洗汽车，要做好蒙上污垢的心理准备。"
+                        android:textColor="#ffffff"
+                        android:textSize="6pt"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+            </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+        </LinearLayout>
+    </LinearLayout>
